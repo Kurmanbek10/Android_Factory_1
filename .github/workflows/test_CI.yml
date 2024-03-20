@@ -1,18 +1,23 @@
-name: Sample CI
+name: Lint debug
 on: 
   workflow_dispatch:
     
 jobs:
-  build:
-    name: Build an image
+  lint:
+    name: Linting debug variant
     runs-on: ubuntu-latest
+   
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Run a one line code
-      run: echo "Hello, World!"
-    - name: run a multi-line script
-      run: 
-        echo add other actions to build
-        echo test and deploy your project
-        
+  
+    - uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'
+    
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v3
+    
+    - name: Execute Gradle command - lint debug
+      run: ./gradlew lint debug
