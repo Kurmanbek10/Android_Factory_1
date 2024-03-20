@@ -1,0 +1,18 @@
+name: Sample CI
+on: 
+  workflow_dispatch:
+    
+jobs:
+  build:
+    name: Build an image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Run a one line code
+      run: echo "Hello, World!"
+    - name: run a multi-line script
+      run: 
+        echo add other actions to build
+        echo test and deploy your project
+        
